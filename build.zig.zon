@@ -1,0 +1,16 @@
+.{
+    .name = .introduction_to_algorithms,
+    .version = "0.1.0",
+    .fingerprint = 0xc42a02b6d6992a02,
+    .minimum_zig_version = "0.14.0",
+
+    .dependencies = .{},
+
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "test",
+        "README.md",
+    },
+}
