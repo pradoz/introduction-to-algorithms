@@ -4,13 +4,34 @@ const lib = @import("lib");
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
 
-    try stdout.print("Welcome to my project!\n", .{});
+    try stdout.print("=== Sorting Algorithms in Zig ===\n\n", .{});
 
-    lib.greet("World");
+    try stdout.print("Insertion Sort\n", .{});
+    try stdout.print("-" ** 40 ++ "\n", .{});
 
-    // Use modules
-    const result = lib.module1.compute(42);
-    try stdout.print("Result: {d}\n", .{result});
+    var arr = [_]i32{ 5, 2, 4, 6, 1, 3 };
+
+    try stdout.print("Original array: ", .{});
+    for (arr) |val| {
+        try stdout.print("{d} ", .{val});
+    }
+    try stdout.print("\n", .{});
+
+    lib.sorting.insertionSort(&arr);
+
+    try stdout.print("Sorted array:   ", .{});
+    for (arr) |val| {
+        try stdout.print("{d} ", .{val});
+    }
+    try stdout.print("\n\n", .{});
+
+    var arr2 = [_]i32{ 5, 2, 4, 6, 1, 3 };
+    try stdout.print("Descending sort: ", .{});
+    lib.sorting.sortDescending(&arr2);
+    for (arr2) |val| {
+        try stdout.print("{d} ", .{val});
+    }
+    try stdout.print("\n", .{});
 }
 
 test "main tests" {
