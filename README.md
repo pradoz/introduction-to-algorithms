@@ -6,30 +6,16 @@ Introduction to Algorithms Textbook Implementations in the Zig programming langu
 ## Common Commands
 
 ```bash
-# Build everything
-zig build
-
-# Run the main executable
-zig build run
-
-# Run with arguments
-zig build run -- arg1 arg2
-
-# Run all tests
+# run all tests
 zig build test
 
-# Build examples
-zig build examples
+# run specific test suites
+zig build test-lib
+zig build test-main
+zig build test-sorting
+zig build test-insertion
+zig build test-integration
 
-# Run specific example
-zig build run-example1
-
-# Generate documentation
+# generate docs
 zig build docs
-
-# Build for release
-zig build -Doptimize=ReleaseFast
-
-# Cross-compile
-zig build -Dtarget=x86_64-linux
 ```

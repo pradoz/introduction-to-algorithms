@@ -27,7 +27,7 @@ pub fn main() !void {
 
     var arr2 = [_]i32{ 5, 2, 4, 6, 1, 3 };
     try stdout.print("Descending sort: ", .{});
-    lib.sorting.sortDescending(&arr2);
+    lib.sorting.insertionSortDescending(&arr2);
     for (arr2) |val| {
         try stdout.print("{d} ", .{val});
     }
