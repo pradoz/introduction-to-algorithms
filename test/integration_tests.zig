@@ -1,35 +1,50 @@
 const std = @import("std");
 const lib = @import("lib");
 
-test "integration: insertion sort" {
-    var arr = [_]i32{ 31, 41, 59, 26, 41, 58 };
+// TODO: add more to this file when we have integratable modules
+
+const allocator = std.testing.allocator;
+
+test "integration: ascending sort" {
+    const original = [_]i32{ 31, 41, 59, 26, 41, 58 };
+
+    const verifyAscending = struct {
+        fn check(arr: []const i32) !void {
+            for (arr[0 .. arr.len - 1], arr[1..]) |a, b| {
+                try std.testing.expect(a <= b);
+            }
+        }
+    }.check;
+
+    // insertion sort
+    var arr = original;
     lib.sorting.insertionSort(&arr);
+    try verifyAscending(&arr);
 
-    // verify ascending
-    for (arr[0 .. arr.len - 1], arr[1..]) |a, b| {
-        try std.testing.expect(a <= b);
-    }
-}
-
-test "integration: sorting with utils" {
-    const allocator = std.testing.allocator;
-
-    var arr = [_]i32{ 5, 2, 8, 1, 9 };
-    lib.sorting.insertionSort(&arr);
-
-    // format result
-    const formatted = try lib.utils.formatString(allocator, "Sorted: [{d}, {d}, {d}, {d}, {d}]", .{ arr[0], arr[1], arr[2], arr[3], arr[4] });
-    defer allocator.free(formatted);
-
-    try std.testing.expectEqualStrings("Sorted: [1, 2, 5, 8, 9]", formatted);
+    // merge sort
+    arr = original;
+    try lib.sorting.mergeSort(&arr, allocator);
+    try verifyAscending(&arr);
 }
 
 test "integration: descending sort" {
-    var arr = [_]i32{ 3, 7, 4, 1, 5 };
-    lib.sorting.insertionSortDescending(&arr);
+    const original = [_]i32{ 3, 7, 4, 1, 5 };
 
-    // verify descending order
-    for (arr[0 .. arr.len - 1], arr[1..]) |a, b| {
-        try std.testing.expect(a >= b);
-    }
+    const verifyDescending = struct {
+        fn check(arr: []const i32) !void {
+            for (arr[0 .. arr.len - 1], arr[1..]) |a, b| {
+                try std.testing.expect(a >= b);
+            }
+        }
+    }.check;
+
+    // insertion sort
+    var arr = original;
+    lib.sorting.insertionSortDescending(&arr);
+    try verifyDescending(&arr);
+
+    // merge sort
+    arr = original;
+    try lib.sorting.mergeSortDescending(&arr, allocator);
+    try verifyDescending(&arr);
 }

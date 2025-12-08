@@ -48,8 +48,10 @@ pub fn build(b: *std.Build) void {
     }{
         .{ .path = "src/lib.zig", .step_name = "test-lib", .needs_lib = false },
         .{ .path = "src/main.zig", .step_name = "test-main", .needs_lib = true },
+        .{ .path = "src/utils/helpers.zig", .step_name = "test-utils", .needs_lib = false },
         .{ .path = "src/sorting/mod.zig", .step_name = "test-sorting", .needs_lib = false },
-        .{ .path = "src/sorting/insertion_sort.zig", .step_name = "test-insertion", .needs_lib = false },
+        .{ .path = "src/sorting/insertion_sort.zig", .step_name = "test-sort-insertion", .needs_lib = false },
+        .{ .path = "src/sorting/merge_sort.zig", .step_name = "test-sort-merge", .needs_lib = false },
         .{ .path = "test/integration_tests.zig", .step_name = "test-integration", .needs_lib = true },
     };
 
